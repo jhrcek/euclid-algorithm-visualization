@@ -66,9 +66,25 @@ view ({ a, b } as model) =
         , E.spacing 20
         , E.padding 20
         ]
-        [ E.column [ E.alignTop, E.spacing 10 ]
-            [ slider SetA " a = " a
+        [ E.column
+            [ E.alignTop
+            , E.spacing 10
+            , E.width (E.px 300)
+            , Font.size 16
+            ]
+            [ E.paragraph []
+                [ E.link []
+                    { url = "https://en.wikipedia.org/wiki/Euclidean_algorithm"
+                    , label =
+                        E.el [ Font.color (E.rgb255 114 159 207), Font.size 30 ]
+                            (E.text "Euclidean algorithm")
+                    }
+                , E.text " allows you to compute greatest common divisor (gcd) of two numbers. Pick two numbers using the sliders below."
+                ]
+            , slider SetA " a = " a
             , slider SetB " b = " b
+            , E.el [] (E.text "Steps of the algorithm")
+            , viewSteps steps
             , E.row []
                 [ E.text <|
                     "gcd ("
@@ -87,7 +103,6 @@ view ({ a, b } as model) =
                         String.fromInt <|
                             Arithmetic.gcd a b
                 ]
-            , viewSteps steps
             ]
         , E.el [ Border.width 1, E.alignTop ]
             (rectangle (a < b) <| List.map2 Tuple.pair steps colors)
