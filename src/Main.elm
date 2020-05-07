@@ -69,13 +69,24 @@ view ({ a, b } as model) =
         [ E.column [ E.alignTop, E.spacing 10 ]
             [ slider SetA " a = " a
             , slider SetB " b = " b
-            , E.text <|
-                "gcd ("
-                    ++ String.fromInt a
-                    ++ ", "
-                    ++ String.fromInt b
-                    ++ ") = "
-                    ++ String.fromInt (Arithmetic.gcd a b)
+            , E.row []
+                [ E.text <|
+                    "gcd ("
+                        ++ String.fromInt a
+                        ++ ", "
+                        ++ String.fromInt b
+                        ++ ") = "
+                , E.el
+                    [ Font.color <|
+                        Maybe.withDefault (E.rgb255 0 0 0) <|
+                            List.head <|
+                                List.drop (List.length steps - 1) colors
+                    ]
+                  <|
+                    E.text <|
+                        String.fromInt <|
+                            Arithmetic.gcd a b
+                ]
             , viewSteps steps
             ]
         , E.el [ Border.width 1, E.alignTop ]
