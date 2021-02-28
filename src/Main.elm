@@ -166,6 +166,7 @@ euclidSteps { a, b } =
         smaller =
             min a b
 
+        euclidStepsHelp : Int -> Int -> List Step -> List Step
         euclidStepsHelp x y acc =
             let
                 q =

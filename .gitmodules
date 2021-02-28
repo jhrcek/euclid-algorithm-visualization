@@ -1,4 +1,0 @@
-[submodule "_site"]
-	path = _site
-	url = git@github.com:jhrcek/euclid-algorithm-visualization.git
-	branch = gh-pages
